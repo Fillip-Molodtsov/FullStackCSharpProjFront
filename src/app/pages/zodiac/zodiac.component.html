@@ -1,0 +1,38 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Дізнайтеся свій знак зодіаку</h1>
+    <p class="lead">Виберіть нижче свою дату народження,щоб дізнатися свій знак зодіаку відповідно до західної та китайської астрологічної системи.</p>
+    <hr class="my-5">
+    <form [formGroup]="form"
+          class="ml-auto mr-auto text-center mb-5"
+          (ngSubmit)="submit()" >
+        <input type="text"
+               placeholder="Datepicker"
+               class="form-control my-data-picker"
+               bsDatepicker
+               formControlName="birthday"
+               [bsConfig]="{
+                 adaptivePosition: true,
+                 containerClass:'theme-red',
+                 dateInputFormat: 'YYYY-MM-DD'
+               }">
+      <button class="btn btn-primary my-sub-but" [disabled]="form.invalid" >Дізнатися</button>
+    </form>
+    <div *ngIf="zodiacResponse">
+      <div *ngFor="let msg of zodiacResponse.specialMessage">
+        <alert type="success">
+          {{msg}}
+        </alert>
+      </div>
+      <alert type="info">
+        <strong>Ваш західний знак зодіаку: </strong> {{zodiacResponse.westSign}}
+      </alert>
+      <alert type="info">
+        <strong>Ваш східний знак зодіаку: </strong> {{zodiacResponse.eastSign}}
+      </alert>
+    </div>
+    <div *ngFor="let error of errorMessage?.error">
+        <alert [type]="'danger'" [dismissOnTimeout]="5000" >{{ error }}</alert>
+    </div>
+  </div>
+</div>
