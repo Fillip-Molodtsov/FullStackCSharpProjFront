@@ -3,7 +3,7 @@ export class ZodiacResponse {
   westSign: string;
   eastSign: string;
   age: number;
-  specialMessage: Array<string>;
+  specialMessages: Array<string>;
 
   constructor(init: Partial<ZodiacResponse>) {
     Object.assign(this, init);

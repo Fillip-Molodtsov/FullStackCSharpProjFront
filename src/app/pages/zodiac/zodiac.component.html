@@ -19,7 +19,7 @@
       <button class="btn btn-primary my-sub-but" [disabled]="form.invalid" >Дізнатися</button>
     </form>
     <div *ngIf="zodiacResponse">
-      <div *ngFor="let msg of zodiacResponse.specialMessage">
+      <div *ngFor="let msg of zodiacResponse.specialMessages">
         <alert type="success">
           {{msg}}
         </alert>
