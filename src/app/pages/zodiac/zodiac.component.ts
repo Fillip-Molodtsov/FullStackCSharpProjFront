@@ -4,6 +4,7 @@ import {FormGroup} from '@angular/forms';
 import {ZodiacResponse} from '../../shared/models/ZodiacResponse.model';
 import {HttpZodiacService} from '../../shared/http-services/http-zodiac.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-zodiac',
@@ -18,6 +19,8 @@ export class ZodiacComponent {
 
   public errorMessage: HttpErrorResponse;
 
+  public isLoaded = true;
+
   constructor(
     private zodiacFormBuilder: ZodiacFormBuilderService,
     private httpZodiacService: HttpZodiacService
@@ -29,14 +32,22 @@ export class ZodiacComponent {
     : void {
     this.zodiacResponse = null;
     this.errorMessage = null;
+    this.isLoaded = false;
     const {birthday: d} = this.form.value;
     const date = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-    this.httpZodiacService.getZodiacTask(date).subscribe(
-      res => {
-        this.zodiacResponse = res;
-      },
-      error => {
-        this.errorMessage = error;
-      });
+    this.httpZodiacService
+      .getZodiacTask(date)
+      .pipe(
+        finalize(() => {
+          this.isLoaded = true;
+        })
+      )
+      .subscribe(
+        res => {
+          this.zodiacResponse = res;
+        },
+        error => {
+          this.errorMessage = error;
+        });
   }
 }

@@ -16,7 +16,14 @@
                  containerClass:'theme-red',
                  dateInputFormat: 'YYYY-MM-DD'
                }">
-      <button class="btn btn-primary my-sub-but" [disabled]="form.invalid" >Дізнатися</button>
+      <button
+        class="btn btn-primary my-sub-but"
+        [disabled]="form.invalid"
+        *ngIf="isLoaded"
+      >Дізнатися</button>
+      <div class="spinner-border" role="status" *ngIf="!isLoaded">
+        <span class="sr-only">Loading...</span>
+      </div>
     </form>
     <div *ngIf="zodiacResponse">
       <div *ngFor="let msg of zodiacResponse.specialMessages">
