@@ -32,14 +32,16 @@
         </alert>
       </div>
       <alert type="info">
-        <strong>Ваш західний знак зодіаку: </strong> {{zodiacResponse.westSign}}
+        <strong>Ваш західний знак зодіаку: </strong> {{zodiacResponse.ageInfo.westSign}}
       </alert>
       <alert type="info">
-        <strong>Ваш східний знак зодіаку: </strong> {{zodiacResponse.eastSign}}
+        <strong>Ваш східний знак зодіаку: </strong> {{zodiacResponse.ageInfo.eastSign}}
       </alert>
     </div>
-    <div *ngFor="let error of errorMessage?.error">
+    <div *ngIf="errorMessage">
+      <div *ngFor="let error of errorMessage.error">
         <alert [type]="'danger'" [dismissOnTimeout]="5000" >{{ error }}</alert>
+      </div>
     </div>
   </div>
 </div>

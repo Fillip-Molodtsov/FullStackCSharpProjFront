@@ -1,8 +1,7 @@
+import {AgeInfo} from './AgeInfo';
+
 export class ZodiacResponse {
-  birthday: string;
-  westSign: string;
-  eastSign: string;
-  age: number;
+  ageInfo: AgeInfo;
   specialMessages: Array<string>;
 
   constructor(init: Partial<ZodiacResponse>) {
