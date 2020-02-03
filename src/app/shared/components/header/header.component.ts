@@ -9,6 +9,17 @@ export class HeaderComponent implements OnInit {
 
   private isCollapsed: boolean;
 
+  links = [
+    {
+      link: '/zodiac',
+      label: 'Zodiac'
+    },
+    {
+      link: '/person',
+      label: 'Person'
+    }
+  ];
+
   constructor() {
   }
 

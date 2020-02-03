@@ -9,10 +9,9 @@
        [isAnimated]="true"
        id="collapseBasic">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item" routerLink="/zodiac" routerLinkActive="active">
-        <a class="nav-link">Zodiac</a>
+      <li class="nav-item custom-nav-link" routerLink="{{link.link}}" routerLinkActive="active" *ngFor="let link of links">
+        <a class="nav-link">{{link.label}}</a>
       </li>
-
     </ul>
   </div>
 </nav>

@@ -21,12 +21,10 @@ export class ZodiacFormBuilderService {
   }
 
   public getDataFromForm(form: FormGroup)
-    : Partial<Person> {
-    const { birthday } = form.value;
+    : string {
+    const {birthday} = form.value;
 
-    return new Person({
-      birthday
-    });
+    return birthday;
   }
 
 }

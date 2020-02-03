@@ -7,12 +7,14 @@ import {AppRoutingModule} from './app-routing.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {SharedModule} from './shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import { PersonComponent } from './pages/person/person.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ZodiacComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,
