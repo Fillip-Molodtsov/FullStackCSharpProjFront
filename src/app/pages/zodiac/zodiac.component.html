@@ -11,6 +11,9 @@
                class="form-control my-form-control"
                bsDatepicker
                formControlName="birthday"
+               [minDate]="minDate"
+               [maxDate]="maxDate"
+               [ngClass]="{'form-wrong': form.controls.birthday.invalid && form.controls.birthday.dirty}"
                [bsConfig]="{
                  adaptivePosition: true,
                  containerClass:'theme-red',
@@ -18,8 +21,8 @@
                }">
       <button
         class="btn btn-primary my-sub-but"
-        [disabled]="form.invalid"
         *ngIf="isLoaded"
+        [disabled]="form.invalid"
       >Дізнатися</button>
       <div class="spinner-border" role="status" *ngIf="!isLoaded">
         <span class="sr-only">Loading...</span>

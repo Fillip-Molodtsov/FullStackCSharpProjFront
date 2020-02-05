@@ -26,6 +26,9 @@
              class="form-control my-form-control"
              bsDatepicker
              formControlName="birthday"
+             [minDate]="minDate"
+             [maxDate]="maxDate"
+             [ngClass]="{'form-wrong': form.controls.birthday.invalid && form.controls.birthday.dirty}"
              [bsConfig]="{
                  adaptivePosition: true,
                  containerClass:'theme-red',
@@ -56,7 +59,7 @@
         <strong>Ваша пошта: </strong> {{personResponse.person.personalInfo.email}}
       </alert>
       <alert type="info">
-        <strong>Ваш день народження: </strong> {{personResponse.person.personalInfo.birthday}}
+        <strong>Ваш день народження: </strong> {{personResponse.person.personalInfo.birthday | date:"dd.MM.yyyy"}}
       </alert>
       <alert type="info">
         <strong>Сьогодні Ваш день народження? </strong>

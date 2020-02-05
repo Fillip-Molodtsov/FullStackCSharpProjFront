@@ -5,6 +5,7 @@ import {FormGroup} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
 import {PersonResponse} from '../../shared/models/PersonResponse.model';
+import {getDateParsed} from '../../shared/helpers/dateHelper';
 
 @Component({
   selector: 'app-person',
@@ -21,10 +22,17 @@ export class PersonComponent implements OnInit {
 
   public isLoaded = true;
 
+  public minDate: Date;
+  public maxDate: Date;
+
   constructor(
     private personFormBuilder: PersonFormBuilderService,
     private httpPersonService: HttpPersonService
   ) {
+    this.minDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 200);
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 10);
     this.form = this.personFormBuilder.buildGroup();
   }
 
@@ -38,8 +46,7 @@ export class PersonComponent implements OnInit {
     this.isLoaded = false;
     const body = this.personFormBuilder.getDataFromForm(this.form);
     const d = new Date(body.personalInfo.birthday);
-    const date = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
-    body.personalInfo.birthday = date;
+    body.personalInfo.birthday = getDateParsed(d);
     this.httpPersonService
       .postPerson(body)
       .pipe(

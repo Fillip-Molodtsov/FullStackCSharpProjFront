@@ -21,10 +21,18 @@ export class ZodiacComponent {
 
   public isLoaded = true;
 
+  public minDate: Date;
+
+  public maxDate: Date;
+
   constructor(
     private zodiacFormBuilder: ZodiacFormBuilderService,
     private httpZodiacService: HttpZodiacService
   ) {
+    this.minDate = new Date();
+    this.minDate.setFullYear(this.minDate.getFullYear() - 200);
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 10);
     this.form = zodiacFormBuilder.buildGroup();
   }
 
