@@ -51,34 +51,34 @@
         </alert>
       </div>
       <alert type="info">
-        <strong>Ваше ім'я: </strong> {{personResponse.person.personalInfo.name}}
+        <strong>Ваше ім'я: </strong> {{personResponse.person.name}}
       </alert>
       <alert type="info">
-        <strong>Ваше прізвище: </strong> {{personResponse.person.personalInfo.surname}}
+        <strong>Ваше прізвище: </strong> {{personResponse.person.surname}}
       </alert>
       <alert type="info">
-        <strong>Ваша пошта: </strong> {{personResponse.person.personalInfo.email}}
+        <strong>Ваша пошта: </strong> {{personResponse.person.email}}
       </alert>
       <alert type="info">
-        <strong>Ваш день народження: </strong> {{personResponse.person.personalInfo.birthday | date:"dd.MM.yyyy"}}
+        <strong>Ваш день народження: </strong> {{personResponse.person.birthday | date:"dd.MM.yyyy"}}
       </alert>
       <alert type="info">
         <strong>Сьогодні Ваш день народження? </strong>
-        {{personResponse.person.zodiacResponse.ageInfo.isBirthday ? "Так": "Ні"}}
+        {{personResponse.person.isBirthday ? "Так": "Ні"}}
       </alert>
       <alert type="info">
         <strong>Ваш вік: </strong>
-        {{personResponse.person.zodiacResponse.ageInfo.age}}
+        {{personResponse.person.age}}
       </alert>
       <alert type="info">
         <strong>Ви дорослий(а)? </strong>
-        {{personResponse.person.zodiacResponse.ageInfo.isAdult ? "Так": "Ні"}}
+        {{personResponse.person.isAdult ? "Так": "Ні"}}
       </alert>
       <alert type="info">
-        <strong>Ваш західний знак зодіаку: </strong> {{personResponse.person.zodiacResponse.ageInfo.westSign}}
+        <strong>Ваш західний знак зодіаку: </strong> {{personResponse.person.westSign}}
       </alert>
       <alert type="info">
-        <strong>Ваш східний знак зодіаку: </strong> {{personResponse.person.zodiacResponse.ageInfo.eastSign}}
+        <strong>Ваш східний знак зодіаку: </strong> {{personResponse.person.eastSign}}
       </alert>
     </div>
     <div *ngIf="errorMessage">

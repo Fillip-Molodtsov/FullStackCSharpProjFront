@@ -19,7 +19,7 @@ export class HttpPersonService {
 
   public postPerson(person: Partial<Person>)
     : Observable<PersonResponse> {
-    return this.http.post<PersonResponse>(`${this.urlPerson}`, person.personalInfo);
+    return this.http.post<PersonResponse>(`${this.urlPerson}`, person);
   }
 
 

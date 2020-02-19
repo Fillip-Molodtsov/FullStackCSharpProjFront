@@ -45,8 +45,8 @@ export class PersonComponent implements OnInit {
     this.errorMessage = null;
     this.isLoaded = false;
     const body = this.personFormBuilder.getDataFromForm(this.form);
-    const d = new Date(body.personalInfo.birthday);
-    body.personalInfo.birthday = getDateParsed(d);
+    const d = new Date(body.birthday);
+    body.birthday = getDateParsed(d);
     this.httpPersonService
       .postPerson(body)
       .pipe(

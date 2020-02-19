@@ -28,12 +28,10 @@ export class PersonFormBuilderService {
     const {birthday, name, surname, email} = form.value;
 
     return new Person({
-      personalInfo: {
         birthday,
         name,
         surname,
         email
-      }
     });
   }
 }
