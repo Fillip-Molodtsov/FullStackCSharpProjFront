@@ -14,7 +14,7 @@ export class HttpPersonService {
   private readonly urlPerson: string;
 
   constructor(private http: HttpClient) {
-    this.urlPerson = `${this.baseUrl}person/`;
+    this.urlPerson = `${this.baseUrl}people/`;
   }
 
   public postPerson(person: Partial<Person>)

@@ -1,5 +1,3 @@
-import {ZodiacResponse} from './ZodiacResponse.model';
-
 export class Person {
   birthday: string;
   name: string;
@@ -10,6 +8,7 @@ export class Person {
   isBirthday: boolean;
   isAdult: boolean;
   age: number;
+  id: string;
 
   constructor(init: Partial<Person>) {
     Object.assign(this, init);
