@@ -8,13 +8,15 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {SharedModule} from './shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { PersonComponent } from './pages/person/person.component';
+import { PeopleComponent } from './pages/people/people.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ZodiacComponent,
     NotFoundComponent,
-    PersonComponent
+    PersonComponent,
+    PeopleComponent
   ],
   imports: [
     BrowserModule,

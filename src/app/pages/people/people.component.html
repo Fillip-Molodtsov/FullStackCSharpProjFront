@@ -1,1 +1,75 @@
-<p>people works!</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Карточки з людьми з колекції даних </h1>
+    <p class="lead">Можна редагувати, видаляти, створювати та переглядати людей</p>
+    <hr class="my-5">
+    <div class="w-100 d-flex justify-content-center align-items-center flex-column">
+      <button
+        class="btn btn-warning my-but"
+        [disabled]="disableSaveButton"
+        (click)="save()"
+      >Зберегти дані</button>
+
+      <form
+        [formGroup]="filterSortForm"
+        class="filter-sort-form"
+        (ngSubmit)="submitQuery()"
+      >
+        <div class="form-group my-form-group">
+          <label for="sortBy">Sort by:</label>
+          <select class="form-control"
+                  id="sortBy"
+                  formControlName="ps">
+            <option [ngValue]="null"></option>
+            <option
+              *ngFor="let x of personPropertiesList"
+              [ngValue]="x">{{x}}</option>
+          </select>
+        </div>
+        <div
+          *ngIf="filterSortForm.get('ps').value"
+          class="form-group my-form-group">
+          <label for="desc">Descending:</label>
+          <select class="form-control"
+                  id="desc"
+                  formControlName="desc">
+            <option [ngValue]="false">False</option>
+            <option [ngValue]="true">True</option>
+          </select>
+        </div>
+        <div class="form-group  my-form-group">
+          <label for="filterBy">Filter by:</label>
+          <select class="form-control"
+                  id="filterBy"
+                  formControlName="pf">
+            <option [ngValue]="null"></option>
+            <option
+              *ngFor="let x of personPropertiesList"
+              [ngValue]="x">{{x}}</option>
+          </select>
+        </div>
+        <div
+          *ngIf="filterSortForm.get('pf').value"
+          class="form-group my-form-group">
+          <label for="filterValue">Filter value:</label>
+          <input type="text"
+                 class="form-control"
+                 id="filterValue"
+                 formControlName="value">
+        </div>
+        <button
+          class="btn btn-primary my-form-but"
+          [disabled]="!isLoaded"
+        >Пошук</button>
+      </form>
+
+      <div class="spinner-border" role="status" *ngIf="!isLoaded">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <div *ngFor="let mes of infoMessages">
+      <alert [type]="'info'" [dismissOnTimeout]="2000" >{{ mes }}</alert>
+    </div>
+  </div>
+</div>

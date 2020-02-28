@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
     {
       link: '/person',
       label: 'Person'
+    },
+    {
+      link: '/people',
+      label: 'People'
     }
   ];
 

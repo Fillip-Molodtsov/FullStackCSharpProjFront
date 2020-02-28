@@ -12,13 +12,13 @@ export class PersonFormBuilderService {
   ) {
   }
 
-  public buildGroup()
+  public buildGroup(person: Partial<Person>)
     : FormGroup {
     return this.formBuilder.group({
-        birthday: ['', [Validators.required]],
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        surname: ['', [Validators.required, Validators.minLength(3)]],
-        email: ['', [Validators.required, Validators.email]]
+        birthday: [person ? person.birthday : '', [Validators.required]],
+        name: [person ? person.name : '', [Validators.required, Validators.minLength(3)]],
+        surname: [person ? person.surname : '', [Validators.required, Validators.minLength(3)]],
+        email: [person ? person.email : '', [Validators.required, Validators.email]]
       }
     );
   }
@@ -28,10 +28,10 @@ export class PersonFormBuilderService {
     const {birthday, name, surname, email} = form.value;
 
     return new Person({
-        birthday,
-        name,
-        surname,
-        email
+      birthday,
+      name,
+      surname,
+      email
     });
   }
 }
