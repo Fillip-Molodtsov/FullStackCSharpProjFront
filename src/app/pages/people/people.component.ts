@@ -5,8 +5,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Person} from '../../shared/models/Person.model';
 import {FormGroup} from '@angular/forms';
 import {PeopleFormBuilderService} from '../../shared/form-builder-services/people-form-builder.service';
-import {Observable} from 'rxjs';
-import {log} from 'util';
+import {PersonPassingService} from '../../shared/services/person-passing.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-people',
@@ -31,7 +31,9 @@ export class PeopleComponent implements OnInit {
 
   constructor(
     private httpPersonService: HttpPersonService,
-    private peopleFormBuilderService: PeopleFormBuilderService
+    private peopleFormBuilderService: PeopleFormBuilderService,
+    private personPassingService: PersonPassingService,
+    private router: Router
   ) {
     this.infoMessages = [];
     this.filterSortForm = this.peopleFormBuilderService.buildGroup();
@@ -78,7 +80,6 @@ export class PeopleComponent implements OnInit {
     : void {
     this.isLoaded = false;
     const filterSortPersonParams = this.peopleFormBuilderService.getDataFromForm(this.filterSortForm);
-    console.log(filterSortPersonParams.pf);
     let sub;
     if (!filterSortPersonParams.ps && !filterSortPersonParams.pf) {
       sub = this.httpPersonService.getPeople('Surname', false);
@@ -101,5 +102,19 @@ export class PeopleComponent implements OnInit {
       },
       error => this.error = error
     );
+  }
+
+   public addNewPerson()
+    : void {
+    this.personPassingService.setParameterPerson(null);
+    this.router.navigate(['/person']);
+  }
+
+  public updateUser($event: Person) {
+
+  }
+
+  public deleteUser($event: number) {
+
   }
 }

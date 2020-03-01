@@ -9,6 +9,7 @@ import {SharedModule} from './shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import { PersonComponent } from './pages/person/person.component';
 import { PeopleComponent } from './pages/people/people.component';
+import { PersonCardComponent } from './pages/people/components/person-card/person-card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PeopleComponent } from './pages/people/people.component';
     ZodiacComponent,
     NotFoundComponent,
     PersonComponent,
-    PeopleComponent
+    PeopleComponent,
+    PersonCardComponent
   ],
   imports: [
     BrowserModule,

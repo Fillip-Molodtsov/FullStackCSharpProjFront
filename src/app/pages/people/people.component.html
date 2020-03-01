@@ -2,6 +2,10 @@
   <div class="container">
     <h1 class="display-4">Карточки з людьми з колекції даних </h1>
     <p class="lead">Можна редагувати, видаляти, створювати та переглядати людей</p>
+    <p class="lead">Можна одночасно фільтрувати та сортувати або роздільно, якщо залишити одне с полів пустим</p>
+    <p class="lead">Запит до фільтрування булевих типів повинен бути true або false</p>
+    <p class="lead">Запит до фільтрування дат повинен бути у форматі yyyy-MM-dd</p>
+    <p class="lead">Для збереження змін натисніть кнопку "Зберегти дані"</p>
     <hr class="my-5">
     <div class="w-100 d-flex justify-content-center align-items-center flex-column">
       <button
@@ -9,7 +13,10 @@
         [disabled]="disableSaveButton"
         (click)="save()"
       >Зберегти дані</button>
-
+      <button
+        class="btn btn-warning my-but"
+        (click)="addNewPerson()"
+      >Додати нову людину</button>
       <form
         [formGroup]="filterSortForm"
         class="filter-sort-form"
@@ -71,5 +78,18 @@
     <div *ngFor="let mes of infoMessages">
       <alert [type]="'info'" [dismissOnTimeout]="2000" >{{ mes }}</alert>
     </div>
+    <div *ngIf="error">
+      <alert [type]="'danger'" [dismissOnTimeout]="5000" >{{ error.error }}</alert>
+    </div>
+  </div>
+</div>
+<div class="container person-card-container">
+  <div *ngFor="let person of people">
+    <app-person-card
+      [person]="person"
+      (update)="updateUser($event)"
+      (delete)="deleteUser($event)"
+    >
+    </app-person-card>
   </div>
 </div>

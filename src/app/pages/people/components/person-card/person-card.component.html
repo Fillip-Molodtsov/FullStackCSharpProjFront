@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-body" [ngClass]="{'bg-success': person.isBirthday}">
+    <h5 class="card-title">{{person.surname}} {{person.name}}</h5>
+    <p class="card-text">Вік: {{person.age}} {{person.isAdult ? '( Повнолітній (-ня) )':''}}</p>
+    <p class="card-text">День народження:
+      {{person.birthday | date : "yyyy-MM-dd"}} {{person.isBirthday ? '( Сьогодні )' : ''}}</p>
+    <p class="card-text">Знаки зодіаку: </p>
+    <p class="card-text">західний: {{person.westSign}}; східний: {{person.eastSign}}</p>
+    <p class="card-text">Email: {{person.email}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
