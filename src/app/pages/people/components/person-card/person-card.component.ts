@@ -6,23 +6,28 @@ import {Person} from '../../../../shared/models/Person.model';
   templateUrl: './person-card.component.html',
   styleUrls: ['./person-card.component.scss']
 })
-export class PersonCardComponent implements OnInit {
+export class PersonCardComponent {
 
   @Input()
   public person: Person;
 
-  @Output('update')
+  @Output()
   public update: EventEmitter<Person>;
 
   @Output()
-  public delete: EventEmitter<number>;
+  public delete: EventEmitter<string>;
 
   constructor() {
     this.update = new EventEmitter<Person>();
-    this.delete = new EventEmitter<number>();
+    this.delete = new EventEmitter<string>();
   }
 
-  ngOnInit() {
+
+  public updateUser() {
+    this.update.emit(this.person);
   }
 
+  public deleteUser() {
+    this.delete.emit(this.person.id);
+  }
 }

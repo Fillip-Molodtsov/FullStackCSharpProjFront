@@ -1,12 +1,16 @@
-<div class="card">
-  <div class="card-body" [ngClass]="{'bg-success': person.isBirthday}">
+<div class="card mb-5"
+     [ngClass]="{'bg-success text-light': person.isBirthday}">
+  <div class="card-body">
     <h5 class="card-title">{{person.surname}} {{person.name}}</h5>
-    <p class="card-text">Вік: {{person.age}} {{person.isAdult ? '( Повнолітній (-ня) )':''}}</p>
+    <p class="card-text">Вік: {{person.age}}</p>
+    <p class="card-text">{{person.isAdult ? 'П':'Неп'}}овнолітній (-ня)</p>
     <p class="card-text">День народження:
       {{person.birthday | date : "yyyy-MM-dd"}} {{person.isBirthday ? '( Сьогодні )' : ''}}</p>
+    <p class="card-text">{{person.isBirthday ? 'C':'Не с'}}ьогодні день народження</p>
     <p class="card-text">Знаки зодіаку: </p>
     <p class="card-text">західний: {{person.westSign}}; східний: {{person.eastSign}}</p>
     <p class="card-text">Email: {{person.email}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <a class="btn btn-primary mr-3" (click)="updateUser()"><i class="fas fa-edit"></i></a>
+    <a class="btn btn-primary" (click)="deleteUser()"><i class="fas fa-minus-circle"></i></a>
   </div>
 </div>

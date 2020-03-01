@@ -7,6 +7,7 @@ import {AlertModule, BsDatepickerModule, CollapseModule} from 'ngx-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {MatPaginatorModule} from '@angular/material';
 
 
 
@@ -24,6 +25,7 @@ import {HttpClientModule} from '@angular/common/http';
     AlertModule,
     FormsModule,
     HttpClientModule,
+    MatPaginatorModule
   ],
   imports: [
     ReactiveFormsModule,
@@ -31,6 +33,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     BrowserAnimationsModule,
     CommonModule,
+    MatPaginatorModule,
     RouterModule,
     CollapseModule.forRoot(),
     BsDatepickerModule.forRoot(),

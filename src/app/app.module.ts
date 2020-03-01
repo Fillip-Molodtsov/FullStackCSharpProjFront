@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { PersonComponent } from './pages/person/person.component';
 import { PeopleComponent } from './pages/people/people.component';
 import { PersonCardComponent } from './pages/people/components/person-card/person-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PersonCardComponent } from './pages/people/components/person-card/perso
     BrowserModule,
     SharedModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

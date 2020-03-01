@@ -62,20 +62,24 @@ export class PersonComponent implements OnInit, OnDestroy {
     const body = this.personFormBuilder.getDataFromForm(this.form);
     const d = new Date(body.birthday);
     body.birthday = getDateParsed(d);
-    this.httpPersonService
-      .postPerson(body)
-      .pipe(
-        finalize(() => {
-          this.isLoaded = true;
-        })
-      )
-      .subscribe(
-        res => {
-          this.personResponse = res;
-        },
-        error => {
-          this.errorMessage = error;
-        });
+    let sub;
+    if (this.person) {
+      body.id = this.person.id;
+      sub = this.httpPersonService.putPerson(body);
+    } else {
+      sub = this.httpPersonService.postPerson(body);
+    }
+    sub.pipe(
+      finalize(() => {
+        this.isLoaded = true;
+      })
+    ).subscribe(
+    res => {
+      this.personResponse = res;
+    },
+    error => {
+      this.errorMessage = error;
+    });
   }
 
 }

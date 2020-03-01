@@ -67,7 +67,8 @@ export class HttpPersonService {
   }
 
   public deletePerson(id: string)
-    : Observable<PersonResponse> {
-    return this.http.delete<PersonResponse>(`${this.urlPerson}${id}`);
+    : Observable<string> {
+    const headers = new HttpHeaders().set('Content-Type', 'text/plain; charset=utf-8');
+    return this.http.delete<string>(`${this.urlPerson}${id}`,{headers, responseType: 'text' as 'json'});
   }
 }

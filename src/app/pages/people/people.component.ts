@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpPersonService} from '../../shared/http-services/http-person.service';
 import {finalize} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -7,6 +7,7 @@ import {FormGroup} from '@angular/forms';
 import {PeopleFormBuilderService} from '../../shared/form-builder-services/people-form-builder.service';
 import {PersonPassingService} from '../../shared/services/person-passing.service';
 import {Router} from '@angular/router';
+import {MatPaginator, PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-people',
@@ -14,6 +15,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./people.component.scss']
 })
 export class PeopleComponent implements OnInit {
+
+
+  @ViewChild('paginator', {static: false}) paginator: MatPaginator;
 
   public isLoaded = false;
 
@@ -27,7 +31,11 @@ export class PeopleComponent implements OnInit {
 
   public infoMessages: Array<string>;
 
+  public pageSize = 5;
+
   public people: Array<Person>;
+
+  public peopleSliced: Array<Person>;
 
   constructor(
     private httpPersonService: HttpPersonService,
@@ -48,6 +56,7 @@ export class PeopleComponent implements OnInit {
       ).subscribe(
       res => {
         this.people = res;
+        this.refreshFirstPage(0, this.pageSize);
       },
       error => this.error = error
     );
@@ -69,7 +78,10 @@ export class PeopleComponent implements OnInit {
     this.disableSaveButton = true;
     this.httpPersonService.save()
       .pipe(
-        finalize(() => this.disableSaveButton = false)
+        finalize(() => {
+          this.disableSaveButton = false;
+          this.submitQuery();
+        })
       )
       .subscribe(res => {
         this.infoMessages.push(res);
@@ -87,34 +99,59 @@ export class PeopleComponent implements OnInit {
       sub = this.httpPersonService.getFilteredPeople(filterSortPersonParams.pf, filterSortPersonParams.value);
     } else if (!filterSortPersonParams.pf) {
       sub = this.httpPersonService.getPeople(filterSortPersonParams.ps, filterSortPersonParams.desc);
+      this.filterSortForm.get('value').reset();
     } else {
       sub = this.httpPersonService.getFilSortedPeople(filterSortPersonParams.pf, filterSortPersonParams.value,
         filterSortPersonParams.ps, filterSortPersonParams.desc);
     }
     sub.pipe(
       finalize(
-        () => this.isLoaded = true
+        () => {
+          this.isLoaded = true;
+          this.paginator.firstPage();
+        }
       )
     ).subscribe(
       res => {
-        console.log(res);
         this.people = res;
+        this.refreshFirstPage(0, this.pageSize);
       },
       error => this.error = error
     );
   }
 
-   public addNewPerson()
+  public addNewPerson()
     : void {
     this.personPassingService.setParameterPerson(null);
     this.router.navigate(['/person']);
   }
 
   public updateUser($event: Person) {
-
+    this.personPassingService.setParameterPerson($event);
+    this.router.navigate(['/person']);
   }
 
-  public deleteUser($event: number) {
+  public deleteUser($event: string) {
+    this.isLoaded = false;
+    this.httpPersonService.deletePerson($event)
+      .pipe(
+        finalize(() => {
+          this.submitQuery();
+        })
+      )
+      .subscribe(
+        res => this.infoMessages.push(res),
+        error => this.error = error
+      );
+  }
 
+  public pageChange($event: PageEvent) {
+    const start = $event.pageSize * $event.pageIndex;
+    const end = start + $event.pageSize;
+    this.refreshFirstPage(start, end);
+  }
+
+  private refreshFirstPage(start: number, end: number) {
+    this.peopleSliced = this.people.slice(start, end);
   }
 }

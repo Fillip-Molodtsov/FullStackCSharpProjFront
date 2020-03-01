@@ -76,15 +76,15 @@
     </div>
 
     <div *ngFor="let mes of infoMessages">
-      <alert [type]="'info'" [dismissOnTimeout]="2000" >{{ mes }}</alert>
+      <alert [type]="'info'" [dismissOnTimeout]="5000" >{{ mes }}</alert>
     </div>
     <div *ngIf="error">
       <alert [type]="'danger'" [dismissOnTimeout]="5000" >{{ error.error }}</alert>
     </div>
   </div>
 </div>
-<div class="container person-card-container">
-  <div *ngFor="let person of people">
+<div class="container person-card-container d-flex justify-content-around flex-wrap">
+  <div *ngFor="let person of peopleSliced" class="person-card-wrapper">
     <app-person-card
       [person]="person"
       (update)="updateUser($event)"
@@ -92,4 +92,18 @@
     >
     </app-person-card>
   </div>
+</div>
+
+<div
+  class="container paginator-container ml-auto mr-auto"
+  *ngIf="people"
+>
+  <mat-paginator
+    #paginator
+    [length]="people.length"
+    [pageSize]="pageSize"
+    [hidePageSize]="true"
+    (page)="pageChange($event)"
+  >
+  </mat-paginator>
 </div>

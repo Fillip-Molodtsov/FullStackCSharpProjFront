@@ -1,3 +1,5 @@
+@import "../../../styles/styles-breakpoints";
+
 .my-but{
   max-width:300px;
   margin-bottom: 20px;
@@ -25,5 +27,19 @@
 }
 
 .person-card-container{
-  margin-bottom: 90px;
+  margin-bottom: 50px;
+}
+
+.paginator-container{
+  margin-bottom: 70px;
+}
+
+.person-card-wrapper{
+  margin-right: 0;
+  &:last-child{
+    margin-right: 0;
+  }
+  @include md{
+    margin-right: 30px;
+  }
 }
